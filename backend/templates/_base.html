@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{% block title %}Shohoj Toll{% endblock %}</title>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --muted: #666;
+      --bg: #f4f5f7;
+      --card: #ffffff;
+      --accent: #0b7a3b;
+      --danger: #c62828;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .shell {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .hdr {
+      padding: 18px 20px;
+      color: #fff;
+      background: var(--accent);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.3px;
+    }
+    .hdr small { display: block; font-weight: 400; font-size: 12px; opacity: 0.85; }
+    .body { padding: 20px; }
+    .row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 15px; }
+    .row .k { color: var(--muted); }
+    .row .v { font-weight: 600; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0 0;
+      border: 0;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    .btn.secondary { background: #2d3748; }
+    .btn.ghost { background: #fff; color: var(--fg); border: 1px solid #d0d3d8; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .pill.paid  { background: #e6f4ea; color: #0b7a3b; }
+    .pill.unpaid{ background: #fff3e0; color: #b26a00; }
+    .pill.late  { background: #fdecea; color: #c62828; }
+    .divider { height: 1px; background: #eceef1; margin: 14px 0; }
+    .err { color: var(--danger); font-size: 14px; margin: 8px 0 0; }
+    input[type=password], input[type=text] {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      border: 1px solid #d0d3d8;
+      border-radius: 10px;
+      letter-spacing: 6px;
+      text-align: center;
+    }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .footnote { text-align: center; font-size: 11px; color: var(--muted); padding: 12px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    {% block content %}{% endblock %}
+    <div class="footnote">Prototype — ShohojToll demo. Not a real payment.</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: shohojtoll-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: shohojtoll-db
+          property: connectionString
+      - key: API_KEY
+        generateValue: true          # Render auto-generates a secret
+      - key: BACKEND_URL
+        value: https://shohojtoll-api.onrender.com
+      - key: ALLOWED_ORIGINS
+        value: https://shohojtoll-dashboard.streamlit.app
+
+databases:
+  - name: shohojtoll-db
+    plan: free
+    databaseName: shohojtoll

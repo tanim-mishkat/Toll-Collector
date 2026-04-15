@@ -1,0 +1,64 @@
+{% extends "_base.html" %}
+{% block title %}Toll Payment — Ref #{{ event.id }}{% endblock %}
+{% block content %}
+<div class="hdr">
+  ShohojToll
+  <small>Electronic Toll Collection</small>
+</div>
+<div class="body">
+  {% if vehicle and vehicle.brta_blocked %}
+    <div style="background:#fdecea;color:#c62828;padding:12px;border-radius:8px;
+                font-size:13px;font-weight:600;margin-bottom:12px;">
+      ⚠ BRTA BLOCK ACTIVE — fitness renewal, ownership transfer and route
+      permit are suspended until all dues are cleared.
+    </div>
+  {% endif %}
+
+  <div class="row"><span class="k">Reference</span><span class="v">#{{ event.id }}</span></div>
+  <div class="row"><span class="k">Vehicle</span><span class="v">{{ event.plate }}</span></div>
+  {% if vehicle and vehicle.owner_name and vehicle.owner_name != "UNKNOWN" %}
+  <div class="row"><span class="k">Owner</span><span class="v">{{ vehicle.owner_name }}</span></div>
+  {% endif %}
+  <div class="row"><span class="k">Gantry</span><span class="v">{{ event.gantry_id }}</span></div>
+  <div class="row"><span class="k">Passed</span><span class="v">{{ event.created_at.strftime("%d-%b %H:%M") }}</span></div>
+  <div class="row">
+    <span class="k">Status</span>
+    <span class="v">
+      {% if event.status == "PAID" %}
+        <span class="pill paid">PAID</span>
+      {% elif event.status in ("LATE", "FINED", "BLOCKED") %}
+        <span class="pill late">{{ event.status }}</span>
+      {% else %}
+        <span class="pill unpaid">{{ event.status }}</span>
+      {% endif %}
+    </span>
+  </div>
+
+  <div class="divider"></div>
+  <div class="row"><span class="k">Base toll</span>
+    <span class="v">BDT {{ "%.0f"|format(event.amount_bdt) }}</span></div>
+  {% if event.late_fee_bdt and event.late_fee_bdt > 0 %}
+  <div class="row"><span class="k" style="color:#b26a00;">Late fee</span>
+    <span class="v" style="color:#b26a00;">+ BDT {{ "%.0f"|format(event.late_fee_bdt) }}</span></div>
+  {% endif %}
+  {% if event.fine_bdt and event.fine_bdt > 0 %}
+  <div class="row"><span class="k" style="color:#c62828;">Fine</span>
+    <span class="v" style="color:#c62828;">+ BDT {{ "%.0f"|format(event.fine_bdt) }}</span></div>
+  {% endif %}
+  {% set total = event.amount_bdt + (event.late_fee_bdt or 0) + (event.fine_bdt or 0) %}
+  <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px dashed #d0d3d8;">
+    <span class="k">Total due</span>
+    <span class="v" style="font-size: 22px;">BDT {{ "%.0f"|format(total) }}</span>
+  </div>
+
+  {% if event.status == "PAID" %}
+    <div class="divider"></div>
+    <p class="muted">Paid on {{ event.paid_at.strftime("%d-%b %H:%M") if event.paid_at else "—" }}. Dhonnobad.</p>
+  {% else %}
+    <div class="divider"></div>
+    <a class="btn" style="background:#e2136e" href="/pay/{{ event.id }}/bkash">Pay with bKash</a>
+    <a class="btn" style="background:#ec1c24" href="/pay/{{ event.id }}/nagad">Pay with Nagad</a>
+    <a class="btn ghost" href="/ussd">Use USSD (*999#)</a>
+  {% endif %}
+</div>
+{% endblock %}

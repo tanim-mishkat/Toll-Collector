@@ -1,0 +1,41 @@
+{% extends "_base.html" %}
+{% block title %}{{ gateway.name }} Payment{% endblock %}
+{% block content %}
+<div class="hdr" style="background: {{ gateway.primary }};">
+  {{ gateway.name }}
+  <small>{{ gateway.tagline }}</small>
+</div>
+<div class="body">
+  <div class="row"><span class="k">Paying to</span><span class="v">ShohojToll ({{ gateway.short_code }})</span></div>
+  <div class="row"><span class="k">Reference</span><span class="v">#{{ event.id }}</span></div>
+  <div class="row"><span class="k">Vehicle</span><span class="v">{{ event.plate }}</span></div>
+  <div class="divider"></div>
+  <div class="row"><span class="k">Base toll</span>
+    <span class="v">BDT {{ "%.0f"|format(event.amount_bdt) }}</span></div>
+  {% if event.late_fee_bdt and event.late_fee_bdt > 0 %}
+  <div class="row"><span class="k" style="color:#b26a00;">Late fee</span>
+    <span class="v" style="color:#b26a00;">+ BDT {{ "%.0f"|format(event.late_fee_bdt) }}</span></div>
+  {% endif %}
+  {% if event.fine_bdt and event.fine_bdt > 0 %}
+  <div class="row"><span class="k" style="color:#c62828;">Fine</span>
+    <span class="v" style="color:#c62828;">+ BDT {{ "%.0f"|format(event.fine_bdt) }}</span></div>
+  {% endif %}
+  {% set total = event.amount_bdt + (event.late_fee_bdt or 0) + (event.fine_bdt or 0) %}
+  <div class="row" style="margin-top:8px;padding-top:10px;border-top:1px dashed #d0d3d8;">
+    <span class="k">Amount</span>
+    <span class="v" style="font-size: 22px;">BDT {{ "%.0f"|format(total) }}</span>
+  </div>
+
+  <form method="post" action="/pay/{{ event.id }}/{{ gateway_key }}" style="margin-top: 18px;">
+    <label for="pin">Enter your {{ gateway.name }} PIN</label>
+    <input id="pin" name="pin" type="password" inputmode="numeric" maxlength="5"
+           autocomplete="off" autofocus required />
+    {% if error %}<div class="err">{{ error }}</div>{% endif %}
+    <button class="btn" style="background: {{ gateway.primary }};" type="submit">
+      Confirm Payment
+    </button>
+    <a class="btn ghost" href="/pay/{{ event.id }}">Cancel</a>
+  </form>
+  <p class="muted" style="margin-top:12px;">Demo: any 4–5 digit numeric PIN works.</p>
+</div>
+{% endblock %}

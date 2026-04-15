@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(python run_server.py)",
+      "Bash(curl -s http://localhost:8000/health)",
+      "Bash(.venv/Scripts/python.exe -c \"import uvicorn; print\\('uvicorn ok'\\)\")",
+      "Bash(.venv/Scripts/python.exe run_server.py)",
+      "Bash(echo \"Server PID: $!\")",
+      "Bash(rm -f toll.db)",
+      "Bash(.venv/Scripts/python.exe seed.py)",
+      "Bash(kill 1045)",
+      "Bash(pkill -f \"run_server.py\")",
+      "Bash(pkill -f \"uvicorn\")",
+      "Bash(tasklist)",
+      "Bash(taskkill /F /PID 14096 /PID 23484 /PID 20816)",
+      "Bash(taskkill //F //PID 14096)",
+      "Bash(taskkill //F //PID 23484)",
+      "Bash(taskkill //F //PID 20816)",
+      "Bash(curl -s http://localhost:8000/stats)",
+      "Bash(curl -s \"http://localhost:8000/events?limit=5\")",
+      "Bash(curl -s http://localhost:8000/vehicles)",
+      "Bash(.venv/Scripts/python.exe -c ':*)",
+      "Bash(.venv/Scripts/python.exe run_dashboard.py)",
+      "Bash(echo \"dashboard PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8501/healthz)",
+      "Bash(.venv/Scripts/pip install:*)",
+      "Bash(.venv/Scripts/python.exe -c \"from config import API_KEY; print\\(API_KEY\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -X POST http://localhost:8000/toll-events -H \"Content-Type: application/json\" -d '{\"plate\":\"TEST\",\"gantry_id\":\"G1\",\"ocr_confidence\":0.9}')",
+      "Bash(curl -s -X POST http://localhost:8000/toll-events -H 'Content-Type: application/json' -H 'X-API-Key: __TRACKED_VAR__' -d '{\"plate\":\"DHAKA-METRO-GA-11-1234\",\"gantry_id\":\"TEST\",\"ocr_confidence\":0.95}')",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('status:', d['event']['status'], '| owner:', d['vehicle']['owner_name']\\)\")",
+      "Bash(curl -sI http://localhost:8000/health)",
+      "Bash(.venv/Scripts/python.exe -c \"import secrets; print\\(secrets.token_hex\\(32\\)\\)\")",
+      "Bash(echo API_KEY=__TRACKED_VAR__)",
+      "Bash(echo \"ENV=development\")",
+      "Bash(taskkill //F //IM python.exe)",
+      "Bash(.venv/Scripts/python.exe -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('status:', d['event']['status'], '| owner:', d['vehicle']['owner_name'], '| BDT:', d['event']['amount_bdt']\\)\")"
+    ]
+  }
+}

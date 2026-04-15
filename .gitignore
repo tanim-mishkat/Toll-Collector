@@ -1,0 +1,47 @@
+# Secrets — never commit
+.env
+.env.local
+*.env
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Build / dist
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Database — local only
+*.db
+*.sqlite
+*.sqlite3
+
+# YOLO model weights — large binary, download via download_model.py
+models/*.pt
+models/*.onnx
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit local secrets (use platform secrets management in prod)
+.streamlit/secrets.toml
+

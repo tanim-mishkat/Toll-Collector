@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ShohojToll — Printable Demo Plates</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0; padding: 0; color: #111;
+  }
+  .sheet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14mm 10mm;
+    padding: 6mm;
+  }
+  .card {
+    border: 1px dashed #999;
+    padding: 8mm 6mm;
+    page-break-inside: avoid;
+    text-align: center;
+  }
+  .plate {
+    background: #fff;
+    border: 4px solid #111;
+    border-radius: 6px;
+    padding: 8mm 6mm;
+    margin: 0 auto 4mm;
+    width: 88mm;
+    box-shadow: 0 2px 0 #000;
+  }
+  .plate .row1 {
+    font-size: 22pt;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1.05;
+    font-family: "Arial Black", "Impact", sans-serif;
+  }
+  .plate .row2 {
+    font-size: 34pt;
+    font-weight: 900;
+    letter-spacing: 4px;
+    font-family: "Arial Black", "Impact", sans-serif;
+    margin-top: 2mm;
+  }
+  .persona {
+    font-size: 12pt;
+    font-weight: 700;
+    margin-top: 2mm;
+  }
+  .meta {
+    font-size: 9pt;
+    color: #555;
+    margin-top: 1mm;
+    line-height: 1.35;
+  }
+  .badge {
+    display: inline-block;
+    margin-top: 2mm;
+    padding: 1mm 3mm;
+    border-radius: 999px;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .badge.good   { background: #e6f4ea; color: #0b7a3b; }
+  .badge.evader { background: #fdecea; color: #c62828; }
+  .badge.fleet  { background: #fff3e0; color: #b26a00; }
+  .badge.block  { background: #c62828; color: #fff; }
+  .badge.new    { background: #e3f2fd; color: #0d47a1; }
+  h1 {
+    text-align: center;
+    font-size: 14pt;
+    margin: 6mm 0 0;
+  }
+  .sub {
+    text-align: center;
+    font-size: 9pt;
+    color: #666;
+    margin-bottom: 4mm;
+  }
+  @media print {
+    .hint { display: none; }
+  }
+  .hint {
+    text-align: center;
+    font-size: 10pt;
+    color: #b26a00;
+    padding: 4mm;
+    background: #fff8e1;
+    border-bottom: 1px solid #f0d68a;
+  }
+</style>
+</head>
+<body>
+
+<div class="hint">
+  Print at <b>100% scale</b> (no "fit to page"). Cut along the dashed borders and hold a card ~30&nbsp;cm
+  from the camera. Each plate maps to a seeded vehicle in <code>seed.py</code>.
+</div>
+
+<h1>ShohojToll — Demo Plate Cards</h1>
+<div class="sub">Phase 8 · hold in front of the gantry camera · one persona per card</div>
+
+<div class="sheet">
+
+  <div class="card">
+    <div class="plate">
+      <div class="row1">DHAKA METRO GA</div>
+      <div class="row2">11-1234</div>
+    </div>
+    <div class="persona">Karim Ahmed — Good Payer</div>
+    <div class="meta">
+      Private car · 01711-000001<br>
+      Pays within seconds on the bKash page.
+    </div>
+    <div class="badge good">GOLDEN PATH</div>
+  </div>
+
+  <div class="card">
+    <div class="plate">
+      <div class="row1">DHAKA METRO KHA</div>
+      <div class="row2">22-5678</div>
+    </div>
+    <div class="persona">Fatima Begum — USSD User</div>
+    <div class="meta">
+      Private car · feature phone · 01811-000002<br>
+      Pays via dialing *999# simulator.
+    </div>
+    <div class="badge new">USSD FLOW</div>
+  </div>
+
+  <div class="card">
+    <div class="plate">
+      <div class="row1">CHATTO METRO HA</div>
+      <div class="row2">14-9012</div>
+    </div>
+    <div class="persona">Rahim Uddin — Evader</div>
+    <div class="meta">
+      Truck · 01911-000003<br>
+      Ignores reminder &rarr; late fee &rarr; fine &rarr; BRTA block.
+    </div>
+    <div class="badge evader">ENFORCEMENT DEMO</div>
+  </div>
+
+  <div class="card">
+    <div class="plate">
+      <div class="row1">SYLHET GA</div>
+      <div class="row2">17-7788</div>
+    </div>
+    <div class="persona">Abdul Motin — Already Blocked</div>
+    <div class="meta">
+      Bus · 01511-000005<br>
+      BRTA block already applied; gantry flags instantly.
+    </div>
+    <div class="badge block">BRTA BLOCK</div>
+  </div>
+
+  <div class="card">
+    <div class="plate">
+      <div class="row1">DHAKA METRO BA</div>
+      <div class="row2">13-3456</div>
+    </div>
+    <div class="persona">Nadia Hossain — Fleet Owner</div>
+    <div class="meta">
+      Private car (second in fleet) · 01611-000004<br>
+      Shows multi-vehicle view on Vehicles tab.
+    </div>
+    <div class="badge fleet">FLEET VIEW</div>
+  </div>
+
+  <div class="card">
+    <div class="plate">
+      <div class="row1">DHAKA METRO DA</div>
+      <div class="row2">19-8080</div>
+    </div>
+    <div class="persona">Imran Chowdhury — Motorbike</div>
+    <div class="meta">
+      Motorcycle · 01511-000010<br>
+      Lowest-tier toll; demonstrates class-based pricing.
+    </div>
+    <div class="badge new">CLASS PRICING</div>
+  </div>
+
+</div>
+
+</body>
+</html>
