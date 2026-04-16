@@ -1,0 +1,9 @@
+# Full deps for local machine (camera + dashboard + server)
+-r requirements.txt
+opencv-python==4.10.0.84
+numpy==1.26.4
+ultralytics==8.3.40
+easyocr==1.7.2
+streamlit==1.40.1
+streamlit-autorefresh==1.0.1
+pandas==2.2.3
