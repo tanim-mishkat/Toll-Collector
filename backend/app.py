@@ -263,3 +263,23 @@ def admin_tick() -> dict:
     counts = enforcement.run_cycle()
     return {"ok": True, "transitions": counts,
             "ran_at": datetime.utcnow().isoformat()}
+
+
+@app.post("/admin/seed", dependencies=[Depends(require_api_key)])
+def admin_seed(db: Session = Depends(get_session)) -> dict:
+    """Seed demo vehicles into the DB. Requires API key."""
+    from seed import FAKE_VEHICLES
+    added = 0
+    for plate, owner, phone, nid, vclass, bal, blocked in FAKE_VEHICLES:
+        plate = plate.strip().upper()
+        if db.get(models.Vehicle, plate):
+            continue
+        db.add(models.Vehicle(
+            plate=plate, owner_name=owner, phone=phone, nid=nid,
+            vehicle_class=vclass, balance_bdt=bal,
+            brta_blocked=blocked, registered=True,
+        ))
+        added += 1
+    db.commit()
+    total = db.scalar(select(func.count(models.Vehicle.plate))) or 0
+    return {"ok": True, "added": added, "total_vehicles": total}
