@@ -1,4 +1,4 @@
-# Server-only deps (deployed to Render)
+# Shared deps (Render + Streamlit Cloud)
 requests==2.32.3
 fastapi==0.115.5
 uvicorn[standard]==0.32.1
@@ -8,4 +8,5 @@ jinja2==3.1.4
 python-multipart==0.0.17
 python-dotenv==1.0.1
 slowapi==0.1.9
-psycopg2-binary==2.9.10
+streamlit-autorefresh==1.0.1
+pandas==2.2.3
