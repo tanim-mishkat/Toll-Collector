@@ -2,7 +2,7 @@ services:
   - type: web
     name: shohojtoll-api
     runtime: python
-    buildCommand: pip install -r requirements.txt psycopg2-binary==2.9.10
+    buildCommand: pip install -r requirements-server.txt psycopg2-binary==2.9.10
     startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
