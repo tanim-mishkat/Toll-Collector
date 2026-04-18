@@ -12,7 +12,7 @@ from typing import Any
 import pandas as pd
 import requests
 import streamlit as st
-from streamlit_autorefresh import st_autorefresh
+import time
 
 # In production (Streamlit Community Cloud) BACKEND_URL comes from st.secrets.
 # Locally it falls back to config.py.
@@ -51,7 +51,12 @@ st.set_page_config(
     layout="wide",
 )
 
-st_autorefresh(interval=4000, key="dashboard_tick")
+# Auto-refresh: rerun every 4 seconds
+if "last_refresh" not in st.session_state:
+    st.session_state.last_refresh = time.time()
+if time.time() - st.session_state.last_refresh > 4:
+    st.session_state.last_refresh = time.time()
+    st.rerun()
 
 st.markdown(
     """
